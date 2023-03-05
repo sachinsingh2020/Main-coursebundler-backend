@@ -32,7 +32,7 @@ export const authorizeSubscribers = (req, res, next) => {
     return next(
       new ErrorHandler(`Only Subscribers can acces this resource`, 403)
     );
-
+// Sachin Singh 
   next();
 };
 
