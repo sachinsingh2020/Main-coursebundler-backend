@@ -3,7 +3,6 @@ import ErrorHandler from "../utils/errorHandler.js";
 import { catchAsyncError } from "./catchAsyncError.js";
 import { User } from "../models/User.js";
 
-// Sachin Singh 
 export const isAuthenticated = catchAsyncError(async (req, res, next) => {
   const { token } = req.cookies;
 
@@ -15,7 +14,7 @@ export const isAuthenticated = catchAsyncError(async (req, res, next) => {
 
   next();
 });
-// Himanhsu Singh 
+
 export const authorizeSubscribers = (req, res, next) => {
   if (req.user.subscription.status !== "active" && req.user.role !== "admin")
     return next(
@@ -36,5 +35,3 @@ export const authorizeAdmin = (req, res, next) => {
 
   next();
 };
-// Harsh Kumar 
-// Sudhanshu Singh 
