@@ -1,37 +1,37 @@
-import jwt from "jsonwebtoken";
-import ErrorHandler from "../utils/errorHandler.js";
-import { catchAsyncError } from "./catchAsyncError.js";
-import { User } from "../models/User.js";
+import jwt from 'jsonwebtoken';
+import { catchAsyncError } from './CatchAsyncError.js';
+import { User } from '../models/User.js';
+import ErrorHandler from '../utils/errorHandler.js';
+
 
 export const isAuthenticated = catchAsyncError(async (req, res, next) => {
-  const { token } = req.cookies;
+    const { token } = req.cookies;
 
-  if (!token) return next(new ErrorHandler("Not Logged In", 401));
 
-  const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    if (!token) {
+        return next(new ErrorHandler('Login First To Access This Resource', 401));
+    }
 
-  req.user = await User.findById(decoded._id);
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-  next();
-});
+    req.user = await User.findById(decoded._id);
 
-export const authorizeSubscribers = (req, res, next) => {
-  if (req.user.subscription.status !== "active" && req.user.role !== "admin")
-    return next(
-      new ErrorHandler(`Only Subscribers can acces this resource`, 403)
-    );
+    next();
+})
 
-  next();
-};
+
 
 export const authorizeAdmin = (req, res, next) => {
-  if (req.user.role !== "admin")
-    return next(
-      new ErrorHandler(
-        `${req.user.role} is not allowed to access this resource`,
-        403
-      )
-    );
+    if (req.user.role != "admin")
+        return next(new ErrorHandler(`${req.user.role} is not allowed to access this resource`, 403));
 
-  next();
+    next();
+};
+
+export const authorizeSubscribers = (req, res, next) => {
+    if (req.user.subscription.status !== "active" && req.user.role !== "admin")
+        return next(
+            new ErrorHandler(`Only Subscribers can acces this resource`, 403)
+        );
+    next();
 };
