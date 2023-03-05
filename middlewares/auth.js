@@ -15,7 +15,7 @@ export const isAuthenticated = catchAsyncError(async (req, res, next) => {
 
   next();
 });
-
+// Himanhsu Singh 
 export const authorizeSubscribers = (req, res, next) => {
   if (req.user.subscription.status !== "active" && req.user.role !== "admin")
     return next(
@@ -36,4 +36,4 @@ export const authorizeAdmin = (req, res, next) => {
 
   next();
 };
-
+// Harsh Kumar 
