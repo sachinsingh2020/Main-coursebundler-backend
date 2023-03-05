@@ -3,6 +3,7 @@ import ErrorHandler from "../utils/errorHandler.js";
 import { catchAsyncError } from "./catchAsyncError.js";
 import { User } from "../models/User.js";
 
+// Sachin Singh 
 export const isAuthenticated = catchAsyncError(async (req, res, next) => {
   const { token } = req.cookies;
 
