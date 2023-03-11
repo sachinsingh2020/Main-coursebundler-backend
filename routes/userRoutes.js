@@ -12,7 +12,7 @@ router.route('/login').post(login);
 // Logout 
 router.route('/logout').get(logout);
 // Get my Profile 
-router.route('/me').get(isAuthenticated, getMyProfile);
+// router.route('/me').get(isAuthenticated, getMyProfile);
 // Delete my Profile 
 router.route('/me').delete(isAuthenticated, deleteMyProfile);
 // Change Password 
